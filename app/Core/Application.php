@@ -30,6 +30,10 @@ class Application
         'templates.path' => HOME . '/' . APP . '/View'
     ));
 
+    $app->notFound(function () use ($app) {
+      $app->render('errors/404.html');
+    });
+
     $view->parserExtensions = array( // load my twig extensions (so the templates will have my choice of variables)
         new \MyTwigExtension(),
     );

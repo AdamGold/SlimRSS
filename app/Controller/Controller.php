@@ -107,7 +107,10 @@ class Controller
    */
   protected function redirectInAdmin($to = '')
   {
-    $headerUrl = '/' . SUB_FOLDER . '/' . ADMIN_FOLDER . '/' . strtolower($to);
+    $subFolder = '';
+    if (! empty(SUB_FOLDER))
+      $subFolder = '/' . SUB_FOLDER;
+    $headerUrl = $subFolder . '/' . ADMIN_FOLDER . '/' . strtolower($to);
     $this->app->redirect($headerUrl);
   }
 
