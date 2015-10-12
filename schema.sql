@@ -28,9 +28,9 @@ CREATE TABLE `categories` (
 
 CREATE TABLE `channels` (
   `id` int(11) NOT NULL,
-  `title` varchar(250) CHARACTER SET latin1 NOT NULL,
-  `link` varchar(250) CHARACTER SET latin1 NOT NULL,
-  `description` text CHARACTER SET latin1 NOT NULL
+  `title` varchar(250) CHARACTER SET utf8 NOT NULL,
+  `link` varchar(250) CHARACTER SET utf8 NOT NULL,
+  `description` text CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -73,7 +73,7 @@ CREATE TABLE `posts` (
   `date` timestamp NULL DEFAULT NULL,
   `channel_id` int(11) NOT NULL DEFAULT '0',
   `date_inserted` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
