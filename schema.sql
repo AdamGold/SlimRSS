@@ -2,13 +2,20 @@
 -- version 4.4.10
 -- http://www.phpmyadmin.net
 --
+-- Generation Time: Oct 12, 2015 at 01:30 PM
+-- Server version: 5.5.42
+-- PHP Version: 5.6.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rssite_categories`
+-- Table structure for table `categories`
 --
 
-CREATE TABLE `rssite_categories` (
+CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `title` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -16,10 +23,10 @@ CREATE TABLE `rssite_categories` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rssite_channels`
+-- Table structure for table `channels`
 --
 
-CREATE TABLE `rssite_channels` (
+CREATE TABLE `channels` (
   `id` int(11) NOT NULL,
   `title` varchar(250) CHARACTER SET latin1 NOT NULL,
   `link` varchar(250) CHARACTER SET latin1 NOT NULL,
@@ -29,10 +36,10 @@ CREATE TABLE `rssite_channels` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rssite_channels_categories`
+-- Table structure for table `channels_categories`
 --
 
-CREATE TABLE `rssite_channels_categories` (
+CREATE TABLE `channels_categories` (
   `channel_id` int(11) NOT NULL,
   `cat_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -40,10 +47,10 @@ CREATE TABLE `rssite_channels_categories` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rssite_comments`
+-- Table structure for table `comments`
 --
 
-CREATE TABLE `rssite_comments` (
+CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
   `name` varchar(250) NOT NULL,
   `content` text NOT NULL,
@@ -54,10 +61,10 @@ CREATE TABLE `rssite_comments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rssite_posts`
+-- Table structure for table `posts`
 --
 
-CREATE TABLE `rssite_posts` (
+CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
   `title` varchar(250) CHARACTER SET utf8 NOT NULL,
   `content` text CHARACTER SET utf8 NOT NULL,
@@ -71,10 +78,10 @@ CREATE TABLE `rssite_posts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rssite_posts_categories`
+-- Table structure for table `posts_categories`
 --
 
-CREATE TABLE `rssite_posts_categories` (
+CREATE TABLE `posts_categories` (
   `post_id` int(11) NOT NULL,
   `cat_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -82,10 +89,10 @@ CREATE TABLE `rssite_posts_categories` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rssite_users`
+-- Table structure for table `users`
 --
 
-CREATE TABLE `rssite_users` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(250) NOT NULL,
   `password` varchar(250) NOT NULL,
@@ -97,47 +104,47 @@ CREATE TABLE `rssite_users` (
 --
 
 --
--- Indexes for table `rssite_categories`
+-- Indexes for table `categories`
 --
-ALTER TABLE `rssite_categories`
+ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rssite_channels`
+-- Indexes for table `channels`
 --
-ALTER TABLE `rssite_channels`
+ALTER TABLE `channels`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rssite_channels_categories`
+-- Indexes for table `channels_categories`
 --
-ALTER TABLE `rssite_channels_categories`
+ALTER TABLE `channels_categories`
   ADD PRIMARY KEY (`channel_id`,`cat_id`),
   ADD KEY `cat_id` (`cat_id`);
 
 --
--- Indexes for table `rssite_comments`
+-- Indexes for table `comments`
 --
-ALTER TABLE `rssite_comments`
+ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rssite_posts`
+-- Indexes for table `posts`
 --
-ALTER TABLE `rssite_posts`
+ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indexes for table `rssite_posts_categories`
+-- Indexes for table `posts_categories`
 --
-ALTER TABLE `rssite_posts_categories`
+ALTER TABLE `posts_categories`
   ADD PRIMARY KEY (`post_id`,`cat_id`),
   ADD KEY `cat_id` (`cat_id`);
 
 --
--- Indexes for table `rssite_users`
+-- Indexes for table `users`
 --
-ALTER TABLE `rssite_users`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -145,47 +152,47 @@ ALTER TABLE `rssite_users`
 --
 
 --
--- AUTO_INCREMENT for table `rssite_categories`
+-- AUTO_INCREMENT for table `categories`
 --
-ALTER TABLE `rssite_categories`
+ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `rssite_channels`
+-- AUTO_INCREMENT for table `channels`
 --
-ALTER TABLE `rssite_channels`
+ALTER TABLE `channels`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `rssite_comments`
+-- AUTO_INCREMENT for table `comments`
 --
-ALTER TABLE `rssite_comments`
+ALTER TABLE `comments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `rssite_posts`
+-- AUTO_INCREMENT for table `posts`
 --
-ALTER TABLE `rssite_posts`
+ALTER TABLE `posts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `rssite_users`
+-- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `rssite_users`
+ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `rssite_channels_categories`
+-- Constraints for table `channels_categories`
 --
-ALTER TABLE `rssite_channels_categories`
-  ADD CONSTRAINT `rssite_channels_categories_ibfk_2` FOREIGN KEY (`cat_id`) REFERENCES `rssite_categories` (`id`),
-  ADD CONSTRAINT `rssite_channels_categories_ibfk_1` FOREIGN KEY (`channel_id`) REFERENCES `rssite_channels` (`id`);
+ALTER TABLE `channels_categories`
+  ADD CONSTRAINT `channels_categories_ibfk_2` FOREIGN KEY (`cat_id`) REFERENCES `categories` (`id`),
+  ADD CONSTRAINT `channels_categories_ibfk_1` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`);
 
 --
--- Constraints for table `rssite_posts_categories`
+-- Constraints for table `posts_categories`
 --
-ALTER TABLE `rssite_posts_categories`
-  ADD CONSTRAINT `rssite_posts_categories_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `rssite_posts` (`id`),
-  ADD CONSTRAINT `rssite_posts_categories_ibfk_2` FOREIGN KEY (`cat_id`) REFERENCES `rssite_categories` (`id`);
+ALTER TABLE `posts_categories`
+  ADD CONSTRAINT `posts_categories_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
+  ADD CONSTRAINT `posts_categories_ibfk_2` FOREIGN KEY (`cat_id`) REFERENCES `categories` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
