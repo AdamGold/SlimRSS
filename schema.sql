@@ -194,6 +194,4 @@ ALTER TABLE `posts_categories`
   ADD CONSTRAINT `posts_categories_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
   ADD CONSTRAINT `posts_categories_ibfk_2` FOREIGN KEY (`cat_id`) REFERENCES `categories` (`id`);
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET character_set_client = 'utf8' */;
