@@ -17,11 +17,13 @@
         </div>
         {% endfor %}
       </div>
-      <div id="pagination">
-        {% for i in 1..totalPages %}
-          <a href="{{ baseUrl("#{paginationUrl}/#{i}") }}"{% if page == i %}class="current-page"{% endif %}>{{ i }}</a>
-        {% endfor %}
-      </div>
+      {% if totalPages > 1 %}
+        <div id="pagination">
+          {% for i in 1..totalPages %}
+            <a href="{{ baseUrl("#{paginationUrl}/#{i}") }}"{% if page == i %}class="current-page"{% endif %}>{{ i }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
   {% endif %}
 {% endblock %}
