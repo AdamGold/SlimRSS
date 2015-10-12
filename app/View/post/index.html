@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Homepage{% endblock %}
+{% block body %}
+  <div class="text-center">
+    {% if posts is empty %}
+      <h1>We are sorry</h1>
+      <p class="lead">No posts to show here...</p>
+    {% else %}
+      <div id="posts">
+        {% for item in posts %}
+        <div class="post">
+          <a href="{{ baseUrl("post/show/#{item.id}") }}"><h3>{{ item.title }}</h3></a>
+          <img src="{{ item.image }}" alt="{{ item.title }}" />
+          <p>{% if item.date is empty %}{{ item.date_inserted|date("jS \\o\\f F") }}{% else %}{{ item.date|date("jS \\o\\f F") }}{% endif %}, {% for cat in cats[item.id] %}
+          <a href="{{ baseUrl("category/show/#{cat.id}") }}">{{ cat.title }}</a>{% if loop.last != true %}, {% endif %}{% endfor %}{% if item.channel_title is not empty %}, {{ item.channel_title }} Feed{% endif %}</p>
+          <p>{{ item.content }}</p>
+        </div>
+        {% endfor %}
+      </div>
+      <div id="pagination">
+        {% for i in 1..totalPages %}
+          <a href="{{ baseUrl("#{paginationUrl}/#{i}") }}"{% if page == i %}class="current-page"{% endif %}>{{ i }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}

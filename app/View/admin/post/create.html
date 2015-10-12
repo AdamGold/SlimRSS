@@ -1,0 +1,33 @@
+{% extends "admin.html" %}
+{% set page = 'post' %}
+{% block title %}Create Post{% endblock %}
+{% block body %}
+  <h1>Create Post</h1>
+  <p class="lead">Enter the details for a new post</p>
+  <form method="POST">
+    <div class="form-group">
+      <label for="post-title">Title*</label>
+      <input name="post_title" type="text" class="form-control" id="post-title" placeholder="Title">
+    </div>
+    <div class="form-group">
+      <label for="post-image">Image*</label>
+      <input name="post_image" type="text" class="form-control" id="post-image" placeholder="Image">
+    </div>
+    <div class="form-group">
+      <label for="post-content">Content*</label>
+      <textarea name="post_content" id="post-content" class="form-control" rows="3" placeholder="Content"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Categories</label>
+      {% for cat in cats %}
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="post_cats[]" value="{{ cat.id }}">
+          {{ cat.title|capitalize }}
+        </label>
+      </div>
+      {% endfor %}
+    </div>
+    <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+  </form>
+{% endblock %}

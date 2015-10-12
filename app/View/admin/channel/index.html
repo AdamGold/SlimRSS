@@ -1,0 +1,60 @@
+{% extends "admin.html" %}
+{% set page = 'channel' %}
+{% block title %}Channels Panel{% endblock %}
+{% block body %}
+  <div class="row">
+    <div class="col-md-10">
+      <h1>Channels</h1>
+      <p class="lead">All RSS Channels</p>
+    </div>
+    <div class="col-md-2">
+      <a href="{{ baseUrl("#{admin}/channel/create") }}"><button type="button" class="btn btn-primary btn-lg add-channel">Add Channel</button></a>
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        {% for column in columns %}
+          <th>{{ column }}</th>
+        {% endfor %}
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if channels is empty %}
+        <tr>
+          <td colspan="5"><strong>Nothing to show here..</strong></td>
+        </tr>
+      {% else %}
+        {% set i = 1 %}
+        {% for item in channels %}
+          <tr>
+            <th scope="row">{{ i }}</th>
+            <td>{{ item.title }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.link }}</td>
+            <td>
+              {% for cat in cats[item.id] %}
+                {{ cat.title|capitalize }}{% if not loop.last %},{% endif %}
+              {% endfor %}
+            </td>
+            <td>
+              <button onclick="location.href='{{ baseUrl("#{admin}/channel/edit/#{item.id}") }}'" type="button" class="btn btn-default btn-xs">Edit</button>
+              <button onclick="location.href='{{ baseUrl("#{admin}/channel/delete/#{item.id}") }}'" type="button" class="btn btn-default btn-xs">Delete</button>
+            </td>
+          </tr>
+          {% set i = i + 1 %}
+        {% endfor %}
+      {% endif %}
+    </tbody>
+  </table>
+  {% if channels is not empty and totalPages > 1 %}
+    <div id="pagination">
+      Pages:
+      {% for i in 1..totalPages %}
+        <a href="{{ baseUrl("#{admin}/#{paginationUrl}/#{i}") }}"{% if pageNum == i %}class="current-page"{% endif %}>{{ i }}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock %}

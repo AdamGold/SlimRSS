@@ -1,0 +1,16 @@
+{% extends "admin.html" %}
+{% set page = 'category' %}
+{% block title %}Edit {{ cat.title }}{% endblock %}
+{% block body %}
+  {% if cat.id != 0 %}
+    <h1>Edit Tag</h1>
+    <p class="lead">Enter the new details for {{ cat.title }}</p>
+    <form method="POST">
+      <div class="form-group">
+        <label for="category-title">Title*</label>
+        <input value="{{ cat.title }}" name="category_title" type="text" class="form-control" id="category-title" placeholder="Title">
+      </div>
+      <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  {% endif %}
+{% endblock %}

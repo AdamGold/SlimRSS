@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ item.title }}{% endblock %}
+{% block body %}
+  <div class="text-center">
+    <img src="{{ item.image }}" alt="{{ item.title }}" />
+    <h1>{{ item.title }}</h1>
+    <p>{{ item.content }}</p>
+    <div class="post-comments">
+      <h2>Comments</h2>
+      <form method='POST'>
+        <input name="post_comment_name" type="text" class="form-control" placeholder="Name">
+        <textarea name="post_comment_content" class="form-control" placeholder="Comment"></textarea>
+        <button name="submit" type="submit" class="btn btn-primary btn-block">Submit</button>
+      </form>
+      {% if flash['errors'] is not empty %}
+        <p class="bg-danger">
+          <span>{{ flash['errors'] }}</span>
+        </p>
+      {% endif %}
+      {% if flash['success'] is not empty %}
+        <p class="bg-success">
+        <span>{{ flash['success'] }}</span>
+        </p>
+      {% endif %}
+      <div class="comments-area">
+        {% for cmt in comments %}
+        <div class="cmt bs-callout bs-callout-primary" id="cmt-{{ cmt.id }}">
+          <h4>{{ cmt.name }} <span>on {{ cmt.date|date("jS \\o\\f F \\a\\t H:i") }}</span></h4><!-- M/d/Y \\a\\t H:i -->
+          <p>{{ cmt.content }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

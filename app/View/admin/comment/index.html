@@ -1,0 +1,55 @@
+{% extends "admin.html" %}
+{% set page = 'comment' %}
+{% block title %}Comments Panel{% endblock %}
+{% block body %}
+  <div class="row">
+    <div class="col-md-10">
+      <h1>Comments</h1>
+      <p class="lead">All Comments</p>
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        {% for column in columns %}
+          <th>{{ column }}</th>
+        {% endfor %}
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if comments is empty %}
+        <tr>
+          <td colspan="5"><strong>Nothing to show here..</strong></td>
+        </tr>
+      {% else %}
+        {% set i = 1 %}
+        {% for item in comments %}
+          <tr>
+            <th scope="row">{{ i }}</th>
+            <td>{{ item.name }}</td>
+            <td>
+              <p>{{ item.content }}</p>
+            </td>
+            <td>
+              {{ item.date|date("jS \\o\\f F \\a\\t H:i") }}
+            </td>
+            <td>
+            <button onclick="location.href='{{ baseUrl("#{admin}/comment/delete/#{item.id}") }}'" type="button" class="btn btn-default btn-xs">Delete</button>
+            </td>
+          </tr>
+          {% set i = i + 1 %}
+        {% endfor %}
+      {% endif %}
+    </tbody>
+  </table>
+  {% if comments is not empty and totalPages > 1 %}
+    <div id="pagination">
+      Pages:
+      {% for i in 1..totalPages %}
+        <a href="{{ baseUrl("#{admin}/#{paginationUrl}/#{i}") }}"{% if pageNum == i %}class="current-page"{% endif %}>{{ i }}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock %}

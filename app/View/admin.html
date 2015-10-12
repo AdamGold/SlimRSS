@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>{{ siteName }} Admin - {% block title %}{% endblock %}</title>
+
+      <!-- Bootstrap -->
+      <link href="{{ baseUrl("#{bootstrap}/css/bootstrap.min.css") }}" rel="stylesheet">
+      <link href="{{ cssUrl('admin.css') }}" rel="stylesheet">
+    {% endblock %}
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div id="navbar">
+          <ul class="nav navbar-nav">
+            <li {% if page == 'home' %} class="active" {% endif %}><a href="{{ baseUrl("#{admin}") }}">Dashboard</a></li>
+            <li {% if page == 'channel' %} class="active" {% endif %}><a href="{{ baseUrl("#{admin}/channel") }}">Channels</a></li>
+            <li {% if page == 'category' %} class="active" {% endif %}><a href="{{ baseUrl("#{admin}/category") }}">Categories</a></li>
+            <li {% if page == 'comment' %} class="active" {% endif %}><a href="{{ baseUrl("#{admin}/comment") }}">Comments</a></li>
+            <li {% if page == 'post' %} class="active" {% endif %}><a href="{{ baseUrl("#{admin}/post") }}">Posts</a></li>
+          </ul>
+          <p class="navbar-text navbar-right"><a href="{{ baseUrl("#{admin}/user/logout") }}" class="navbar-link">Logout</a></p>
+        </div>
+      </div>
+    </nav>
+    <div class="container content">
+      {% if flash['errors'] is not empty %}
+        <p class="bg-danger">
+          <span>{{ flash['errors'] }}</span>
+        </p>
+      {% endif %}
+      {% if flash['success'] is not empty %}
+        <p class="bg-success">
+        <span>{{ flash['success'] }}</span>
+        </p>
+      {% endif %}
+      {% block body %}{% endblock %}
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ baseUrl("#{bootstrap}/js/bootstrap.min.js") }}"></script>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+{% extends "admin.html" %}
+{% set page = 'channel' %}
+{% block title %}Create Channel{% endblock %}
+{% block body %}
+  <h1>Create Channel</h1>
+  <p class="lead">Enter the details for a new channel</p>
+  <form method="POST">
+    <div class="form-group">
+      <label for="channel-title">Title*</label>
+      <input name="channel_title" type="text" class="form-control" id="channel-title" placeholder="Title">
+    </div>
+    <div class="form-group">
+      <label for="channel-link">Link*</label>
+      <input name="channel_link" type="text" class="form-control" id="channel-link" placeholder="Link">
+    </div>
+    <div class="form-group">
+      <label for="channel-description">Description*</label>
+      <textarea name="channel_description" id="channel-description" class="form-control" rows="3" placeholder="Description"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Categories</label>
+      {% for cat in cats %}
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="channel_cats[]" value="{{ cat.id }}">
+          {{ cat.title|capitalize }}
+        </label>
+      </div>
+      {% endfor %}
+    </div>
+    <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+  </form>
+{% endblock %}

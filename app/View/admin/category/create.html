@@ -1,0 +1,14 @@
+{% extends "admin.html" %}
+{% set page = 'category' %}
+{% block title %}Create Category{% endblock %}
+{% block body %}
+  <h1>Create Category</h1>
+  <p class="lead">Enter the details for a new category</p>
+  <form method="POST">
+    <div class="form-group">
+      <label for="category-title">Title*</label>
+      <input name="category_title" type="text" class="form-control" id="category-title" placeholder="Title">
+    </div>
+    <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+  </form>
+{% endblock %}
