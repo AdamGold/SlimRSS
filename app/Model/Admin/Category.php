@@ -62,6 +62,16 @@ class Category extends \Model\Model
 
   public function delete($id)
   {
+    /* delete all relations with this category (posts and channels will no longer be related to it) */
+    $sthMappingPosts = $this->pdo->prepare('DELETE FROM ' . DB_PREFIX . 'posts_categories WHERE cat_id =  ?');
+    $sthMappingPosts->bindParam(1, $id, \PDO::PARAM_INT);
+    if (false === $sthMappingPosts->execute())
+      return false;
+
+    $sthMappingChannels = $this->pdo->prepare('DELETE FROM ' . DB_PREFIX . 'channels_categories WHERE cat_id =  ?');
+    $sthMappingChannels->bindParam(1, $id, \PDO::PARAM_INT);
+    if (false === $sthMappingChannels->execute())
+      return false;
     $sth = $this->pdo->prepare('DELETE FROM ' . DB_PREFIX . 'categories WHERE id =  ?');
     return $sth->execute(array($id));
   }
