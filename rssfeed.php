@@ -23,9 +23,9 @@ $channels = $sth->fetchAll();
 
 foreach ($channels as $channel) {
 	libxml_use_internal_errors(true);
-	if (false === strpos($channel['link'], '.xml')) // this is not an xml file
-		break;
 	$rss = simpleXML_load_file($channel['link']);
+	if (false === $rss) // not an xml file
+		continue;
 	$items = $rss->channel->item;
 	$sth = $pdo->prepare('SELECT * FROM ' . DB_PREFIX . 'posts WHERE channel_id = ? ORDER BY date DESC'); // last post from this channel
 	$sth->execute(array($channel['id']));
@@ -42,7 +42,7 @@ foreach ($channels as $channel) {
 		$newDate = date('Y-m-d H:i:s', strtotime($date));
 		if (! empty($lastPost)) {
 			if (new DateTime($newDate) <= new DateTime($lastPost['date'])) {
-				break;
+				continue;
 			}
 		}
 
