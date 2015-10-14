@@ -27,8 +27,8 @@ class Controller
             $viewFolder,
             $urlParams,
             $type;
-  public $limit = 3, // front end - posts per page
-          $adminTableLimit = 10; // admin panel - posts per page (in the table)
+  public $limit = POSTS_LIMIT, // front end - posts per page
+          $adminTableLimit = ADMIN_TABLE_LIMIT; // admin panel - posts per page (in the table)
 
   /**
    * instantiate the model for the controller and all the instance params

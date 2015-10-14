@@ -93,3 +93,7 @@ define('CUSTOM_MESSAGES', serialize(array(
  * The name that will be shown in the titles of the pages
  */
 define('SITE_NAME', 'SITENAME');
+
+/* posts limit */
+define('POSTS_LIMIT', 3); // posts per page
+define('ADMIN_TABLE_LIMIT', 10); // items per page in all admin tables
