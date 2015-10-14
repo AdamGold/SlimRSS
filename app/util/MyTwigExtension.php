@@ -28,7 +28,8 @@ class MyTwigExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFunction('baseUrl', array($this, 'base')),
             new \Twig_SimpleFunction('jsUrl', array($this, 'jsUrl')),
-            new \Twig_SimpleFunction('cssUrl', array($this, 'cssUrl'))
+            new \Twig_SimpleFunction('cssUrl', array($this, 'cssUrl')),
+            new \Twig_SimpleFunction('getUrlParams', array($this, 'getUrlParams'))
         );
     }
 
@@ -59,5 +60,14 @@ class MyTwigExtension extends \Twig_Extension
     public function cssUrl($resource)
     {
         return $this->base() . PUBLIC_FOLDER . '/css/' . $resource;
+    }
+
+    public function getUrlParams($arg)
+    {
+        $path = $_SERVER['REQUEST_URI'];
+        $path = str_replace(SUB_FOLDER . '/', '', $path);
+        $path = str_replace(ADMIN_FOLDER . '/', '', $path);
+        $pathArr = array_values(array_filter(explode('/', $path)));
+        return (isset($pathArr[$arg])) ? $pathArr[$arg] : '';
     }
 }

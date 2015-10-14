@@ -17,11 +17,11 @@
       <div class="container">
         <div id="navbar">
           <ul class="nav navbar-nav">
-            <li {% if page == 'home' %} class="active" {% endif %}><a href="{{ baseUrl("#{admin}") }}">Dashboard</a></li>
-            <li {% if page == 'channel' %} class="active" {% endif %}><a href="{{ baseUrl("#{admin}/channel") }}">Channels</a></li>
-            <li {% if page == 'category' %} class="active" {% endif %}><a href="{{ baseUrl("#{admin}/category") }}">Categories</a></li>
-            <li {% if page == 'comment' %} class="active" {% endif %}><a href="{{ baseUrl("#{admin}/comment") }}">Comments</a></li>
-            <li {% if page == 'post' %} class="active" {% endif %}><a href="{{ baseUrl("#{admin}/post") }}">Posts</a></li>
+          <li {% if getUrlParams(0) == 'home' or getUrlParams(0) is empty %} class="active" {% endif %}><a href="{{ baseUrl("#{admin}") }}">Dashboard</a></li>
+          <li {% if getUrlParams(0) == 'channel' %} class="active" {% endif %}><a href="{{ baseUrl("#{admin}/channel") }}">Channels</a></li>
+          <li {% if getUrlParams(0) == 'category' %} class="active" {% endif %}><a href="{{ baseUrl("#{admin}/category") }}">Categories</a></li>
+          <li {% if getUrlParams(0) == 'comment' %} class="active" {% endif %}><a href="{{ baseUrl("#{admin}/comment") }}">Comments</a></li>
+          <li {% if getUrlParams(0) == 'post' %} class="active" {% endif %}><a href="{{ baseUrl("#{admin}/post") }}">Posts</a></li>
           </ul>
           <p class="navbar-text navbar-right"><a href="{{ baseUrl("#{admin}/user/logout") }}" class="navbar-link">Logout</a></p>
         </div>
