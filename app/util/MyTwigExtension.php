@@ -18,6 +18,13 @@ use Slim\Slim;
  */
 class MyTwigExtension extends \Twig_Extension
 {
+    private $controllerFactory;
+
+    public function __construct($controllerFactory)
+    {
+        $this->controllerFactory = $controllerFactory;
+    }
+
     public function getName()
     {
         return 'MyTwigExtension';
@@ -29,6 +36,7 @@ class MyTwigExtension extends \Twig_Extension
             new \Twig_SimpleFunction('baseUrl', array($this, 'base')),
             new \Twig_SimpleFunction('jsUrl', array($this, 'jsUrl')),
             new \Twig_SimpleFunction('cssUrl', array($this, 'cssUrl')),
+            new \Twig_SimpleFunction('render', array($this, 'render')),
             new \Twig_SimpleFunction('getUrlParams', array($this, 'getUrlParams'))
         );
     }
@@ -62,11 +70,16 @@ class MyTwigExtension extends \Twig_Extension
         return $this->base() . PUBLIC_FOLDER . '/css/' . $resource;
     }
 
+    public function render($controller, $action)
+    {
+        $this->controllerFactory->buildController($controller, $action);
+    }
+
     public function getUrlParams($arg)
     {
         $path = $_SERVER['REQUEST_URI'];
-        $path = str_replace(SUB_FOLDER . '/', '', $path);
-        $path = str_replace(ADMIN_FOLDER . '/', '', $path);
+        $path = str_replace(SUB_FOLDER, '', $path);
+        $path = str_replace(ADMIN_FOLDER, '', $path);
         $pathArr = array_values(array_filter(explode('/', $path)));
         return (isset($pathArr[$arg])) ? $pathArr[$arg] : '';
     }
