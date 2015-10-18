@@ -23,7 +23,6 @@ class Application
 {
   public function __construct()
   {
-    $controllerFactory = new \Core\ControllerFactory($app); // the class that builds the controllers
     $view = new \Slim\Views\Twig;
     $app = new \Slim\Slim(array(
         'debug' => DEBUG,
@@ -34,6 +33,8 @@ class Application
     $app->notFound(function () use ($app) {
       $app->render('errors/404.html');
     });
+
+    $controllerFactory = new \Core\ControllerFactory($app); // the class that builds the controllers
 
     $view->parserExtensions = array( // load my twig extensions (so the templates will have my choice of variables)
         new \MyTwigExtension($controllerFactory),
@@ -54,7 +55,6 @@ class Application
 
       return true;
     };
-
 
     $app->group($mainRoute, function () use ($app, $checkQueries, $controllerFactory) {
        // the admin route

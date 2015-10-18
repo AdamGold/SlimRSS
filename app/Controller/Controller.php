@@ -55,7 +55,6 @@ class Controller
     $modelFactory = new \Core\ModelFactory;
     $this->model = $modelFactory->buildModel($this->urlParams['controller'], $admin);
     $this->setViewFolder($admin);
-
     /* authenticate in admin */
     if (true === $admin) {
       if ((strtolower($this->urlParams['controller']) != 'user' || strtolower($this->urlParams['action']) != 'login') && false === $this->authenticate('admin')) {

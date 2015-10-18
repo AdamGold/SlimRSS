@@ -14,4 +14,4 @@ require '../config.php';
 require HOME . '/vendor/autoload.php';
 require HOME . '/' . APP . '/util/MyTwigExtension.php';
 
-$app = new \Core\Application();
+new \Core\Application();
